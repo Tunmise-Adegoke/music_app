@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'app_colors.dart';
+import '../util/app_colors.dart';
 import 'custom_text.dart';
 
 class PlaylistCard extends StatelessWidget {

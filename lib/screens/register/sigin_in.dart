@@ -1,12 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:music_app/screens/home/home_page.dart';
 import 'package:music_app/screens/register/forgot_password.dart';
-import 'package:music_app/util/custom_input_field.dart';
+import 'package:music_app/widget/custom_container.dart';
 
 import '../../util/app_colors.dart';
-import '../../util/custom_container.dart';
-import '../../util/custom_text.dart';
+import '../../widget/custom_input_field.dart';
+import '../../widget/custom_text.dart';
 
 class SignInScreen extends StatefulWidget {
   final VoidCallback? showSignPage;
@@ -17,7 +16,6 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
-  
   final _emailC = TextEditingController();
   final _passwordC = TextEditingController();
 

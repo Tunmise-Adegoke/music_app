@@ -1,14 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:music_app/screens/home/home_page.dart';
-import 'package:music_app/screens/register/auth_page.dart';
+import 'package:music_app/widget/custom_back_button.dart';
+import 'package:music_app/widget/custom_container.dart';
 
 import '../../util/app_colors.dart';
-import '../../util/custom_back_button.dart';
-import '../../util/custom_container.dart';
-import '../../util/custom_input_field.dart';
-import '../../util/custom_text.dart';
+import '../../widget/custom_input_field.dart';
+import '../../widget/custom_text.dart';
 
 class LoginScreen extends StatefulWidget {
   final VoidCallback? showLoginPage;

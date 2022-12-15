@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:music_app/util/app_colors.dart';
-import 'package:music_app/util/custom_text.dart';
+
+import 'custom_text.dart';
 
 class SongCard extends StatelessWidget {
   const SongCard({Key? key}) : super(key: key);
@@ -22,9 +23,10 @@ class SongCard extends StatelessWidget {
                   width: 147,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),
-                    image: const DecorationImage(image: AssetImage('assets/images/Billie Eilish - Bad Guy.jpg'
-                    ),
-                    fit: BoxFit.fitHeight),
+                    image: const DecorationImage(
+                        image: AssetImage(
+                            'assets/images/Billie Eilish - Bad Guy.jpg'),
+                        fit: BoxFit.fitHeight),
                   ),
                 ),
                 Positioned(

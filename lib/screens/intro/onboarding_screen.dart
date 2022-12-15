@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:music_app/screens/register/register.dart';
 import 'package:music_app/util/app_colors.dart';
 
-import '../../util/custom_container.dart';
-import '../../util/custom_text.dart';
+import '../../widget/custom_container.dart';
+import '../../widget/custom_text.dart';
 
 class MusicList extends StatefulWidget {
   const MusicList({Key? key}) : super(key: key);

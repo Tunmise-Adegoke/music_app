@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:music_app/widget/custom_input_field.dart';
 
 import '../../util/app_colors.dart';
-import '../../util/custom_container.dart';
-import '../../util/custom_input_field.dart';
-import '../../util/custom_text.dart';
+import '../../widget/custom_container.dart';
+import '../../widget/custom_text.dart';
 import '../home/home_page.dart';
 
 class ForgotPassword extends StatelessWidget {

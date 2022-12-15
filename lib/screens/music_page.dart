@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:music_app/util/app_colors.dart';
-import 'package:music_app/util/custom_back_button.dart';
-import 'package:music_app/util/custom_text.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
+
+import '../widget/custom_back_button.dart';
+import '../widget/custom_text.dart';
 
 class MusicPage extends StatefulWidget {
   const MusicPage({Key? key}) : super(key: key);

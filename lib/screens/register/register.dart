@@ -3,8 +3,8 @@ import 'package:music_app/screens/register/login.dart';
 import 'package:music_app/screens/register/sigin_in.dart';
 import 'package:music_app/util/app_colors.dart';
 
-import '../../util/custom_container.dart';
-import '../../util/custom_text.dart';
+import '../../widget/custom_container.dart';
+import '../../widget/custom_text.dart';
 
 class RegisterScrren extends StatelessWidget {
   const RegisterScrren({Key? key}) : super(key: key);
@@ -77,8 +77,10 @@ class RegisterScrren extends StatelessWidget {
               left: 30,
               child: CustomContainer(
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const LoginScreen()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const LoginScreen()));
                 },
                 text: 'Register',
                 height: 73,
