@@ -96,9 +96,11 @@ class RegisterScrren extends StatelessWidget {
               child: CustomContainer(
                 onTap: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const SignInScreen()));
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SignInScreen(),
+                    ),
+                  );
                 },
                 text: 'Sign In',
                 height: 73,

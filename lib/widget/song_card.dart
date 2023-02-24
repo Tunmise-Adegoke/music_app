@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:music_app/screens/music_page.dart';
 import 'package:music_app/util/app_colors.dart';
 
 import 'custom_text.dart';
@@ -33,6 +34,12 @@ class SongCard extends StatelessWidget {
                   top: 160,
                   right: 20,
                   child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const MusicPage()));
+                    },
                     child: const CircleAvatar(
                       radius: 15,
                       backgroundColor: AppColors.primaryWhite,

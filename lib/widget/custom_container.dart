@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:music_app/util/app_colors.dart';
 
+
 import 'custom_text.dart';
 
 class CustomContainer extends StatelessWidget {
@@ -28,6 +29,7 @@ class CustomContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+  
     return GestureDetector(
       onTap: onTap,
       child: Container(

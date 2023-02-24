@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:music_app/screens/home/page_1.dart';
 import 'package:music_app/screens/home/page_2.dart';
 import 'package:music_app/screens/home/page_3.dart';
-import 'package:music_app/util/custom_text.dart';
-
+import 'package:music_app/widget/horizontal_box.dart';
+import 'package:music_app/widget/vertical_box.dart';
 import '../../util/app_colors.dart';
+import '../../widget/custom_text.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -29,11 +30,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    // AppSize as = AppSize(context);
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          const SizedBox(height: 36),
+          VerticalBox(size: 36),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 27),
             child: Row(
@@ -49,12 +51,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     ),
                   ),
                 ),
-                const SizedBox(width: 100),
+                HorizontalBox(size: 100),
                 Image.asset('assets/images/icons/Vector (2).png'),
               ],
             ),
           ),
-          const SizedBox(height: 36),
+        VerticalBox(size: 36),
           Container(
             height: 120,
             width: 450,
@@ -68,26 +70,26 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    SizedBox(height: 10),
-                    CustomText(
+                  children:  [
+                    VerticalBox(size: 10),
+                    const CustomText(
                       text: 'New Album',
                       fontWeight: FontWeight.w400,
                       color: Colors.white,
                     ),
-                    CustomText(
+                    const CustomText(
                       text: 'Happier Than',
                       fontWeight: FontWeight.w700,
                       color: Colors.white,
                       size: 22,
                     ),
-                    CustomText(
+                   const  CustomText(
                       text: 'Ever',
                       fontWeight: FontWeight.w700,
                       color: Colors.white,
                       size: 22,
                     ),
-                    CustomText(
+                   const  CustomText(
                       text: 'Billie Eilish',
                       fontWeight: FontWeight.w400,
                       color: Colors.white,
@@ -109,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               ],
             ),
           ),
-          const SizedBox(height: 36),
+          VerticalBox(size: 36),
           TabBar(
             controller: _pageController,
             indicatorColor: AppColors.primaryGreen,

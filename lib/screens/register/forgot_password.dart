@@ -4,6 +4,8 @@ import 'package:music_app/widget/custom_input_field.dart';
 import '../../util/app_colors.dart';
 import '../../widget/custom_container.dart';
 import '../../widget/custom_text.dart';
+import '../../widget/horizontal_box.dart';
+import '../../widget/vertical_box.dart';
 import '../home/home_page.dart';
 
 class ForgotPassword extends StatelessWidget {
@@ -16,7 +18,7 @@ class ForgotPassword extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 36),
+            VerticalBox(size: 36),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 27),
               child: Row(
@@ -32,12 +34,12 @@ class ForgotPassword extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(width: 82),
+                  HorizontalBox(size: 82),
                   Image.asset('assets/images/icons/Vector (2).png'),
                 ],
               ),
             ),
-            const SizedBox(height: 80),
+            VerticalBox(size: 80),
             const Center(
               child: CustomText(
                 text: 'Forgot Password ?',
@@ -46,7 +48,7 @@ class ForgotPassword extends StatelessWidget {
                 size: 30,
               ),
             ),
-            const SizedBox(height: 10),
+            VerticalBox(size: 10),
             const Center(
               child: CustomText(
                 text: 'I know right, it happens all the time',
@@ -55,12 +57,12 @@ class ForgotPassword extends StatelessWidget {
                 size: 16,
               ),
             ),
-            const SizedBox(height: 30),
+            VerticalBox(size: 30),
             const InputField(
               hint: 'Enter New Password',
               size: 16,
             ),
-            const SizedBox(height: 22),
+            VerticalBox(size: 22),
             Center(
               child: CustomContainer(
                 onTap: () {

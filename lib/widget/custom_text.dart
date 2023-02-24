@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:music_app/util/dimensions.dart';
 
 class CustomText extends StatelessWidget {
   final String text;
@@ -19,6 +20,7 @@ class CustomText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppSize as = AppSize(context);
     return GestureDetector(
       onTap: ontap,
       child: Text(
@@ -28,7 +30,7 @@ class CustomText extends StatelessWidget {
           color: color,
           fontFamily: 'Satoshi',
           fontWeight: fontWeight,
-          fontSize: size,
+          fontSize: as.sizeHeightPercent(size),
         ),
       ),
     );

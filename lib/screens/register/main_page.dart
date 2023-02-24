@@ -1,9 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:music_app/screens/home/home_page.dart';
-import 'package:music_app/screens/register/sigin_in.dart';
+import 'package:music_app/screens/register/auth_page.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -14,10 +12,14 @@ class MainPage extends StatelessWidget {
       body: StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
-          if (snapshot.hasData) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const CircularProgressIndicator();
+          } else if (snapshot.hasError) {
+            return const SnackBar(content: Text('Something went wrong'));
+          } else if (snapshot.hasData) {
             return const HomeScreen();
           } else {
-            return const SignInScreen();
+            return const AuthPage();
           }
         },
       ),

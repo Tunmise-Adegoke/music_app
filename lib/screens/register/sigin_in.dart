@@ -1,14 +1,18 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:music_app/screens/home/home_page.dart';
 import 'package:music_app/screens/register/forgot_password.dart';
 import 'package:music_app/widget/custom_container.dart';
+import 'package:music_app/widget/horizontal_box.dart';
 
 import '../../util/app_colors.dart';
+import '../../util/constants.dart';
 import '../../widget/custom_input_field.dart';
 import '../../widget/custom_text.dart';
+import '../../widget/vertical_box.dart';
 
 class SignInScreen extends StatefulWidget {
-  final VoidCallback? showSignPage;
+  final Function()? showSignPage;
   const SignInScreen({Key? key, this.showSignPage}) : super(key: key);
 
   @override
@@ -27,10 +31,14 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   Future signIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: _emailC.text.trim(),
-      password: _passwordC.text.trim(),
-    );
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: _emailC.text.trim(),
+        password: _passwordC.text.trim(),
+      );
+    } on FirebaseAuthException catch (e) {
+      Utils.showSnackBar(e.message);
+    }
   }
 
   @override
@@ -119,12 +127,14 @@ class _SignInScreenState extends State<SignInScreen> {
             const SizedBox(height: 22),
             Center(
               child: CustomContainer(
-                onTap: () {
-                  signIn();
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //         builder: (context) => const HomeScreen()));
+                onTap:
+                    // signIn,
+                    () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const HomeScreen(),
+                      ));
                 },
                 text: 'Sign In',
                 height: 80,
@@ -166,7 +176,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 ],
               ),
             ),
-            const SizedBox(height: 50.88),
+            VerticalBox(size: 50.88),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 137.73),
               child: Row(
@@ -177,7 +187,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     height: 35,
                     width: 35,
                   ),
-                  const SizedBox(width: 58.28),
+                  HorizontalBox(size: 50.28),
                   Image.asset(
                     'assets/images/icons/icons8-apple-logo-30.png',
                     height: 35,
@@ -186,7 +196,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 ],
               ),
             ),
-            const SizedBox(height: 57),
+            VerticalBox(size: 57),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 98),
               child: Row(

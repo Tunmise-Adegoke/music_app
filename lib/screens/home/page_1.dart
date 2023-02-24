@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:music_app/util/playlist_card.dart';
-import 'package:music_app/util/song_card.dart';
+import 'package:music_app/widget/playlist_card.dart';
+import 'package:music_app/widget/song_card.dart';
+import 'package:music_app/widget/vertical_box.dart';
 
-import '../../util/custom_text.dart';
+import '../../widget/custom_text.dart';
 
 class Page1 extends StatelessWidget {
   const Page1({Key? key}) : super(key: key);
@@ -26,7 +27,7 @@ class Page1 extends StatelessWidget {
                 },
               ),
             ),
-            const SizedBox(height: 15),
+            VerticalBox(size: 15),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 29),
               child: Row(
@@ -46,8 +47,9 @@ class Page1 extends StatelessWidget {
                   ),
                 ],
               ),
+
             ),
-            const SizedBox(height: 3),
+            VerticalBox(size: 3),
             SizedBox(
               child: ListView.builder(
                   shrinkWrap: true,
