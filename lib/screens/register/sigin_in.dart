@@ -1,45 +1,27 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:music_app/screens/home/home_page.dart';
+import 'package:flutter_social_button/flutter_social_button.dart';
 import 'package:music_app/screens/register/forgot_password.dart';
+import 'package:music_app/screens/register/main_page.dart';
+import 'package:music_app/services/firebase_services.dart';
 import 'package:music_app/widget/custom_container.dart';
-import 'package:music_app/widget/horizontal_box.dart';
-
 import '../../util/app_colors.dart';
-import '../../util/constants.dart';
+import '../../util/text_editing_ctrl.dart';
+import '../../util/toast.dart';
 import '../../widget/custom_input_field.dart';
 import '../../widget/custom_text.dart';
 import '../../widget/vertical_box.dart';
 
 class SignInScreen extends StatefulWidget {
-  final Function()? showSignPage;
-  const SignInScreen({Key? key, this.showSignPage}) : super(key: key);
+  const SignInScreen({Key? key}) : super(key: key);
 
   @override
   State<SignInScreen> createState() => _SignInScreenState();
 }
 
 class _SignInScreenState extends State<SignInScreen> {
-  final _emailC = TextEditingController();
-  final _passwordC = TextEditingController();
-
-  @override
-  void dispose() {
-    _emailC.dispose();
-    _passwordC.dispose();
-    super.dispose();
-  }
-
-  Future signIn() async {
-    try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: _emailC.text.trim(),
-        password: _passwordC.text.trim(),
-      );
-    } on FirebaseAuthException catch (e) {
-      Utils.showSnackBar(e.message);
-    }
-  }
+  final TextEditCtrl myController = TextEditCtrl();
+  final FirebaseServices services = FirebaseServices();
 
   @override
   Widget build(BuildContext context) {
@@ -100,13 +82,13 @@ class _SignInScreenState extends State<SignInScreen> {
             ),
             const SizedBox(height: 38),
             InputField(
-              controller: _emailC,
+              controller: myController.signInEmailC,
               hint: 'Enter Email',
               size: 16,
             ),
             const SizedBox(height: 16),
             InputField(
-              controller: _passwordC,
+              controller: myController.signInPassC,
               hint: 'Enter Password',
               size: 16,
             ),
@@ -127,15 +109,7 @@ class _SignInScreenState extends State<SignInScreen> {
             const SizedBox(height: 22),
             Center(
               child: CustomContainer(
-                onTap:
-                    // signIn,
-                    () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const HomeScreen(),
-                      ));
-                },
+                onTap: _userLogin,
                 text: 'Sign In',
                 height: 80,
                 width: 325,
@@ -178,20 +152,34 @@ class _SignInScreenState extends State<SignInScreen> {
             ),
             VerticalBox(size: 50.88),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 137.73),
+              padding: const EdgeInsets.symmetric(horizontal: 40),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Image.asset(
-                    'assets/images/icons/google_PNG19635.png',
-                    height: 35,
-                    width: 35,
+                  FlutterSocialButton(
+                    onTap: _googleLogin,
+                    buttonType: ButtonType.google,
+                    mini: true,
                   ),
-                  HorizontalBox(size: 50.28),
-                  Image.asset(
-                    'assets/images/icons/icons8-apple-logo-30.png',
-                    height: 35,
-                    width: 35,
+                  FlutterSocialButton(
+                    onTap: () {
+                      setState(() async {
+                        await services.siginWithOAuth(
+                            'apple.com', ['email'], {'locale': 'en'});
+                      });
+                    },
+                    buttonType: ButtonType.apple,
+                    mini: true,
+                  ),
+                  FlutterSocialButton(
+                    onTap: () {
+                      setState(() async {
+                        await services.siginWithOAuth(
+                            'github.com', ['email'], {'locale': 'en'});
+                      });
+                    },
+                    buttonType: ButtonType.github,
+                    mini: true,
                   ),
                 ],
               ),
@@ -208,7 +196,9 @@ class _SignInScreenState extends State<SignInScreen> {
                     fontWeight: FontWeight.w700,
                   ),
                   CustomText(
-                    ontap: widget.showSignPage,
+                    ontap: () {
+                      Navigator.of(context).pop();
+                    },
                     text: 'Register Now',
                     color: Colors.blue,
                     fontWeight: FontWeight.w700,
@@ -220,5 +210,26 @@ class _SignInScreenState extends State<SignInScreen> {
         ),
       ),
     );
+  }
+
+  void _userLogin() async {
+    await services.signin().whenComplete(() => Navigator.of(context)
+            .pushReplacement(MaterialPageRoute(builder: (context) {
+          return const MainPage();
+        })));
+  }
+
+  void _googleLogin() async {
+    User? user = await services.signInGoogle().whenComplete(
+        () => Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+              return const MainPage();
+            })));
+    if (user != null) {
+      const Toast(message: 'User is signedIn');
+    } else {
+      const Toast(
+        message: 'Sign In failed',
+      );
+    }
   }
 }

@@ -43,6 +43,13 @@ dependencies:
   firebase_core: ^2.1.1
   percent_indicator: ^4.2.2
   audioplayers: ^1.1.1
+  dio: ^5.0.1
+  flutter_appauth: ^4.2.1
+  firebase_auth_oauth: ^1.2.2
+  google_sign_in: ^6.0.1
+  another_flushbar: ^1.12.29
+  flutter_social_button: ^1.1.4+1
+  flutter_hicons: ^0.0.1
 
 dev_dependencies:
   flutter_test:
