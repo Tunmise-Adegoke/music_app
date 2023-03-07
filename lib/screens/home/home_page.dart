@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:music_app/screens/home/page_1.dart';
 import 'package:music_app/screens/home/page_2.dart';
 import 'package:music_app/screens/home/page_3.dart';
+import 'package:music_app/widget/custom_icon.dart';
 import 'package:music_app/widget/horizontal_box.dart';
 import 'package:music_app/widget/vertical_box.dart';
 import '../../util/app_colors.dart';
@@ -35,28 +36,21 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          VerticalBox(size: 36),
+          VerticalBox(size: 45),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 27),
             child: Row(
               children: [
-                GestureDetector(
-                  onTap: () => Navigator.pop(context),
-                  child: const CircleAvatar(
-                    backgroundColor: Colors.white,
-                    radius: 20,
-                    child: Icon(
-                      Icons.search,
-                      color: Colors.black,
-                    ),
-                  ),
+                const CustomIcon(
+                  icon: Icons.search,
+                  color: Colors.black,
                 ),
-                HorizontalBox(size: 100),
+                HorizontalBox(size: 80),
                 Image.asset('assets/images/icons/Vector (2).png'),
               ],
             ),
           ),
-        VerticalBox(size: 36),
+          VerticalBox(size: 36),
           Container(
             height: 120,
             width: 450,
@@ -70,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children:  [
+                  children: [
                     VerticalBox(size: 10),
                     const CustomText(
                       text: 'New Album',
@@ -83,13 +77,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       color: Colors.white,
                       size: 22,
                     ),
-                   const  CustomText(
+                    const CustomText(
                       text: 'Ever',
                       fontWeight: FontWeight.w700,
                       color: Colors.white,
                       size: 22,
                     ),
-                   const  CustomText(
+                    const CustomText(
                       text: 'Billie Eilish',
                       fontWeight: FontWeight.w400,
                       color: Colors.white,

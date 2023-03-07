@@ -4,6 +4,7 @@ import 'package:music_app/screens/home/home_page.dart';
 import 'package:music_app/screens/lyrics.dart';
 import 'package:music_app/screens/users_page.dart';
 import 'package:music_app/util/app_colors.dart';
+import 'package:flutter_hicons/flutter_hicons.dart';
 
 class HomeNav extends StatefulWidget {
   const HomeNav({Key? key}) : super(key: key);
@@ -34,16 +35,20 @@ class _HomeNavState extends State<HomeNav> {
       bottomNavigationBar: BottomNavigationBar(
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Hicons.home_1),
+            label: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.search),
+            icon: Icon(Hicons.discovery_1),
+            label: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
+            icon: Icon(Hicons.heart_1),
+            label: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+            icon: Icon(Hicons.profile_1),
+            label: '',
           ),
         ],
         iconSize: 20,

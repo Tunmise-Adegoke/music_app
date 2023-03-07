@@ -47,13 +47,13 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              VerticalBox(size: 36),
+              VerticalBox(size: 45),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 27),
                 child: Row(
                   children: [
                     const CustomBackButton(),
-                    HorizontalBox(size: 82),
+                    HorizontalBox(size: 80),
                     Image.asset('assets/images/icons/Vector (2).png'),
                   ],
                 ),

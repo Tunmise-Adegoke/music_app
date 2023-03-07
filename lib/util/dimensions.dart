@@ -13,12 +13,12 @@ class AppSize {
     screenHeight = queryData.size.height;
     screenWidth = queryData.size.width;
   }
-  sizeHeightPercent(double size) {
+  hp(double size) {
     double sizeHeight = size / designHeight;
     return screenHeight * sizeHeight;
   }
 
-  sizeWidthPercent(double size) {
+  wp(double size) {
     double sizeWidth = size / designWidth;
     return screenWidth * sizeWidth;
   }

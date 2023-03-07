@@ -50,6 +50,7 @@ dependencies:
   another_flushbar: ^1.12.29
   flutter_social_button: ^1.1.4+1
   flutter_hicons: ^0.0.1
+  provider: ^6.0.5
 
 dev_dependencies:
   flutter_test:

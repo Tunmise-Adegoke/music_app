@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:music_app/screens/register/login.dart';
 import 'package:music_app/screens/register/sigin_in.dart';
 import 'package:music_app/util/app_colors.dart';
+import 'package:music_app/util/dimensions.dart';
+import 'package:music_app/widget/custom_back_button.dart';
 
 import '../../widget/custom_container.dart';
 import '../../widget/custom_text.dart';
@@ -11,29 +13,21 @@ class RegisterScrren extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppSize as = AppSize(context);
     return Scaffold(
       body: Container(
         color: Colors.white,
         child: Stack(
           children: [
             Positioned(
-              top: 405,
+              top: as.hp(405),
               child: Image.asset(
                   'assets/images/15mag-billie-03-master675-v3 1.png'),
             ),
-            Positioned(
-              top: 60,
-              left: 10,
-              child: GestureDetector(
-                onTap: () => Navigator.pop(context),
-                child: const CircleAvatar(
-                  backgroundColor: AppColors.primaryWhite,
-                  child: Icon(
-                    Icons.arrow_back_ios_sharp,
-                    color: Colors.black,
-                  ),
-                ),
-              ),
+            const Positioned(
+              top: 45,
+              left: 27,
+              child: CustomBackButton(),
             ),
             Positioned(
               top: 175,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hicons/flutter_hicons.dart';
 import '../util/app_colors.dart';
+import 'custom_icon.dart';
 import 'custom_text.dart';
 
 class PlaylistCard extends StatelessWidget {
@@ -14,8 +16,8 @@ class PlaylistCard extends StatelessWidget {
           child: const CircleAvatar(
             radius: 15,
             backgroundColor: AppColors.primaryWhite,
-            child: Icon(
-              Icons.play_arrow,
+            child: CustomIcon( icon:
+              Hicons.play_bold,
               color: Colors.black,
             ),
           ),
@@ -42,8 +44,8 @@ class PlaylistCard extends StatelessWidget {
             color: Colors.black,
             size: 15,
           ),
-          Icon(
-            Icons.thumb_up_sharp,
+          CustomIcon(icon:
+            Hicons.heart_1_bold,
             color: AppColors.primaryWhite,
           ),
         ],

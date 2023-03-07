@@ -1,12 +1,18 @@
 import 'package:audioplayers/audioplayers.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hicons/flutter_hicons.dart';
+import 'package:music_app/provider/audioplayer_provider.dart';
 import 'package:music_app/screens/lyrics.dart';
+import 'package:music_app/services/firebase_services.dart';
 import 'package:music_app/util/app_colors.dart';
 import 'package:music_app/util/dimensions.dart';
 import 'package:music_app/widget/horizontal_box.dart';
 import 'package:music_app/widget/vertical_box.dart';
+import 'package:provider/provider.dart';
 
 import '../widget/custom_back_button.dart';
+import '../widget/custom_icon.dart';
 import '../widget/custom_text.dart';
 
 class MusicPage extends StatefulWidget {
@@ -17,25 +23,18 @@ class MusicPage extends StatefulWidget {
 }
 
 class _MusicPageState extends State<MusicPage> {
-  final audioPlayer = AudioPlayer();
-
-  bool isPlaying = false;
-  Duration duration = Duration.zero;
-  Duration position = Duration.zero;
-  @override
-  void dispose() {
-    audioPlayer.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     AppSize as = AppSize(context);
+    final audioP = Provider.of<AudioProvider>(context, listen: false);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        leading: const CustomBackButton(),
+        leading: Transform.scale(
+          scale: 0.6,
+          child: const CustomBackButton(),
+        ),
         centerTitle: true,
         title: const CustomText(
           text: 'Now Playing',
@@ -44,9 +43,9 @@ class _MusicPageState extends State<MusicPage> {
         ),
         actions: [
           Padding(
-            padding: EdgeInsets.only(right: as.sizeWidthPercent(28)),
-            child: const Icon(
-              Icons.menu,
+            padding: EdgeInsets.only(right: as.wp(28)),
+            child: const CustomIcon(
+              icon: Hicons.menu,
               color: Colors.black,
             ),
           ),
@@ -58,10 +57,10 @@ class _MusicPageState extends State<MusicPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              height: as.sizeHeightPercent(370),
-              width: as.sizeWidthPercent(335),
+              height: as.hp(370),
+              width: as.wp(335),
               margin: EdgeInsets.symmetric(
-                horizontal: as.sizeWidthPercent(27),
+                horizontal: as.wp(27),
               ),
               decoration: BoxDecoration(
                 image: const DecorationImage(
@@ -74,88 +73,93 @@ class _MusicPageState extends State<MusicPage> {
             ),
             VerticalBox(size: 17),
             Padding(
-              padding:
-                  EdgeInsets.symmetric(horizontal: as.sizeWidthPercent(28)),
+              padding: EdgeInsets.symmetric(horizontal: as.wp(28)),
+              child: const ListTile(
+                visualDensity: VisualDensity(horizontal: 0),
+                contentPadding: EdgeInsets.symmetric(horizontal: 0),
+                title: CustomText(
+                  text: 'Bad Guy',
+                  size: 20,
+                  fontWeight: FontWeight.w700,
+                ),
+                subtitle: CustomText(
+                  text: 'Billie Eilish',
+                  size: 20,
+                  fontWeight: FontWeight.w400,
+                  color: AppColors.lightGrey,
+                ),
+                trailing: CustomIcon(
+                  icon: Hicons.heart_1,
+                ),
+              ),
+            ),
+            VerticalBox(size: 20),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: as.wp(18)),
+              child: SliderTheme(
+                data: const SliderThemeData(
+                  thumbColor: AppColors.lightGrey,
+                  thumbShape: RoundSliderThumbShape(enabledThumbRadius: 3.0),
+                  overlayShape: RoundSliderOverlayShape(overlayRadius: 4.0),
+                  trackHeight: 3,
+                ),
+                child: Slider(
+                  min: 0.0,
+                  max: audioP.duration.inSeconds.toDouble(),
+                  value: audioP.position.inSeconds.toDouble(),
+                  onChanged: (value) async {
+                    audioP.seek(value);
+                  },
+                  focusNode: FocusNode(),
+                ),
+              ),
+            ),
+            VerticalBox(size: 4),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: as.wp(27)),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  CustomText(
-                    text: 'Bad Guy',
-                    size: 20,
-                    fontWeight: FontWeight.w700,
-                  ),
-                  Icon(Icons.favorite),
-                ],
-              ),
-            ),
-            VerticalBox(size: 6),
-            Padding(
-              padding:
-                  EdgeInsets.symmetric(horizontal: as.sizeWidthPercent(28)),
-              child: const CustomText(
-                text: 'Billie Eilish',
-                size: 20,
-                fontWeight: FontWeight.w400,
-                color: AppColors.lightGrey,
-              ),
-            ),
-            VerticalBox(size: 52),
-            Padding(
-              padding:
-                  EdgeInsets.symmetric(horizontal: as.sizeWidthPercent(27)),
-              child: Slider(
-                min: 0,
-                max: duration.inSeconds.toDouble(),
-                value: position.inSeconds.toDouble(),
-                onChanged: (value) async {},
-              ),
-            ),
-            VerticalBox(size: 10),
-            Padding(
-              padding:
-                  EdgeInsets.symmetric(horizontal: as.sizeWidthPercent(28)),
-              child: Row(
                 children: [
-                  CustomText(text: formatTime(position)),
-                  CustomText(text: formatTime(duration - position)),
+                  CustomText(text: formatTime(audioP.position)),
+                  CustomText(text: formatTime(audioP.duration - audioP.position)),
                 ],
               ),
             ),
-            VerticalBox(size: 52),
+            VerticalBox(size: 30),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 67.25),
               child: Row(
                 children: [
                   const CustomIcon(
-                    icon: Icons.repeat_on_rounded,
+                    icon: Hicons.repeate_3,
                   ),
                   HorizontalBox(size: 15),
                   const CustomIcon(
-                    icon: Icons.skip_previous_outlined,
+                    icon: Hicons.previous,
                     color: AppColors.blackGrey,
                   ),
                   HorizontalBox(size: 10),
                   Container(
-                    height: as.sizeHeightPercent(72),
-                    width: as.sizeWidthPercent(72),
+                    height: as.hp(72),
+                    width: as.wp(72),
                     decoration: const BoxDecoration(
                       color: AppColors.primaryGreen,
                       shape: BoxShape.circle,
                     ),
                     child: Center(
                       child: CustomIcon(
-                        icon: isPlaying ? Icons.pause : Icons.play_arrow,
+                        icon: audioP.isPlaying ? Hicons.pause : Hicons.play,
                       ),
                     ),
                   ),
-                  HorizontalBox(size: 10),
+                  HorizontalBox(size: 10), 
                   const CustomIcon(
-                    icon: Icons.skip_next_outlined,
+                    icon: Hicons.next,
                     color: AppColors.blackGrey,
                   ),
                   HorizontalBox(size: 10),
                   const CustomIcon(
-                    icon: Icons.shuffle_on_rounded,
+                    icon: Hicons.shuffle_1_bold,
                     color: AppColors.blackGrey,
                   ),
                 ],
@@ -166,7 +170,7 @@ class _MusicPageState extends State<MusicPage> {
               child: Column(
                 children: [
                   const CustomIcon(
-                    icon: Icons.arrow_upward_rounded,
+                    icon: Hicons.left_3_bold,
                     color: AppColors.blackGrey,
                   ),
                   CustomText(
@@ -187,42 +191,15 @@ class _MusicPageState extends State<MusicPage> {
     );
   }
 
-  formatTime(Duration duration) {
-    String twoDigits(int n) => n.toString().padLeft(2, '0');
-    final hours = twoDigits(duration.inHours);
-    final minutes = twoDigits(duration.inMinutes.remainder(60));
-    final seconds = twoDigits(duration.inSeconds.remainder(60));
-    return [
-      if (duration.inHours > 0) hours,
-      minutes,
-      seconds,
-    ].join('1');
-  }
-}
-
-class CustomIcon extends StatelessWidget {
-  final IconData icon;
-  final double size;
-  final Function()? onClick;
-  final Color color;
-  const CustomIcon(
-      {Key? key,
-      required this.icon,
-      this.onClick,
-      this.size = 30,
-      this.color = AppColors.lightGrey})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    AppSize as = AppSize(context);
-    return GestureDetector(
-      onTap: onClick,
-      child: Icon(
-        icon,
-        size: as.sizeWidthPercent(size),
-        color: color,
-      ),
-    );
-  }
+  // formatTime(Duration duration) {
+  //   String twoDigits(int n) => n.toString().padLeft(2, '0');
+  //   final hours = twoDigits(duration.inHours);
+  //   final minutes = twoDigits(duration.inMinutes.remainder(60));
+  //   final seconds = twoDigits(duration.inSeconds.remainder(60));
+  //   return [
+  //     if (duration.inHours > 0) hours,
+  //     minutes,
+  //     seconds,
+  //   ].join('1');
+  // }
 }

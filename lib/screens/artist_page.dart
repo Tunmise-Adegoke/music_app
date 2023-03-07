@@ -6,6 +6,7 @@ import 'package:music_app/widget/custom_text.dart';
 import 'package:music_app/widget/horizontal_box.dart';
 import 'package:music_app/widget/vertical_box.dart';
 
+import '../widget/custom_icon.dart';
 import '../widget/playlist_card.dart';
 
 class ArtistPage extends StatefulWidget {
@@ -34,7 +35,7 @@ class _ArtistPageState extends State<ArtistPage> {
                       text:
                           '''Lorem ipsum dolor sit amet, consectetur adipiscing elit. Turpis adipiscing vestibulum orci enim, nascetur vitae '''),
                   VerticalBox(size: 10),
-                  CustomText(text: 'Album'),
+                  const CustomText(text: 'Album'),
                   VerticalBox(size: 10),
                   SizedBox(
                     child: ListView.separated(
@@ -44,8 +45,8 @@ class _ArtistPageState extends State<ArtistPage> {
                           return Column(
                             children: [
                               Container(
-                                height: as.sizeHeightPercent(135),
-                                width: as.sizeWidthPercent(140),
+                                height: as.hp(135),
+                                width: as.wp(140),
                                 decoration: BoxDecoration(
                                     image: const DecorationImage(
                                       image: AssetImage(
@@ -85,8 +86,8 @@ class _ArtistPageState extends State<ArtistPage> {
           ),
           Positioned(
               child: Container(
-            height: as.sizeHeightPercent(240),
-            width: as.sizeWidthPercent(390),
+            height: as.hp(240),
+            width: as.wp(390),
             decoration: const BoxDecoration(
               borderRadius: BorderRadius.only(
                 bottomRight: Radius.circular(69),

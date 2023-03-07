@@ -4,7 +4,10 @@ import 'package:flutter_social_button/flutter_social_button.dart';
 import 'package:music_app/screens/register/forgot_password.dart';
 import 'package:music_app/screens/register/main_page.dart';
 import 'package:music_app/services/firebase_services.dart';
+import 'package:music_app/util/dimensions.dart';
+import 'package:music_app/widget/custom_back_button.dart';
 import 'package:music_app/widget/custom_container.dart';
+import 'package:music_app/widget/horizontal_box.dart';
 import '../../util/app_colors.dart';
 import '../../util/text_editing_ctrl.dart';
 import '../../util/toast.dart';
@@ -25,29 +28,20 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
+    AppSize as = AppSize(context);
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 36),
+            const SizedBox(height: 45),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 27),
               child: Row(
                 children: [
-                  GestureDetector(
-                    onTap: () => Navigator.pop(context),
-                    child: const CircleAvatar(
-                      backgroundColor: AppColors.primaryWhite,
-                      radius: 20,
-                      child: Icon(
-                        Icons.arrow_back_ios_sharp,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 82),
+                  const CustomBackButton(),
+                  HorizontalBox(size: 80),
                   Image.asset('assets/images/icons/Vector (2).png'),
                 ],
               ),

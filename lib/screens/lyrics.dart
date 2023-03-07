@@ -1,13 +1,14 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hicons/flutter_hicons.dart';
 import 'package:music_app/util/dimensions.dart';
 import 'package:music_app/widget/custom_back_button.dart';
 
 import '../util/app_colors.dart';
+import '../widget/custom_icon.dart';
 import '../widget/custom_text.dart';
 import '../widget/horizontal_box.dart';
 import '../widget/vertical_box.dart';
-import 'music_page.dart';
 
 class LyricsPage extends StatefulWidget {
   const LyricsPage({Key? key}) : super(key: key);
@@ -54,19 +55,17 @@ class _LyricsPageState extends State<LyricsPage> {
               ))
         ],
       ),
-      bottomSheet: Container(
-        height: as.sizeHeightPercent(200),
+      bottomSheet: SizedBox(
+        height: as.hp(200),
         width: double.maxFinite,
         child: Column(
           children: [
             Padding(
-              padding:
-                  EdgeInsets.symmetric(horizontal: as.sizeWidthPercent(15)),
+              padding: EdgeInsets.symmetric(horizontal: as.wp(15)),
               child: ListTile(
-                
                 leading: Container(
-                    height: as.sizeHeightPercent(42),
-                    width: as.sizeWidthPercent(42),
+                    height: as.hp(42),
+                    width: as.wp(42),
                     decoration: const BoxDecoration(
                         image: DecorationImage(
                             image: AssetImage(
@@ -83,12 +82,13 @@ class _LyricsPageState extends State<LyricsPage> {
                   fontWeight: FontWeight.w400,
                   color: AppColors.lightGrey,
                 ),
-                trailing: const Icon(Icons.favorite),
+                trailing: const CustomIcon(
+                  icon: Hicons.heart_1_bold,
+                ),
               ),
             ),
             Padding(
-              padding:
-                  EdgeInsets.symmetric(horizontal: as.sizeWidthPercent(31)),
+              padding: EdgeInsets.symmetric(horizontal: as.wp(31)),
               child: Slider(
                 min: 0,
                 max: duration.inSeconds.toDouble(),
@@ -98,8 +98,7 @@ class _LyricsPageState extends State<LyricsPage> {
             ),
             VerticalBox(size: 1),
             Padding(
-              padding:
-                  EdgeInsets.symmetric(horizontal: as.sizeWidthPercent(31)),
+              padding: EdgeInsets.symmetric(horizontal: as.wp(31)),
               child: Row(
                 children: [
                   CustomText(text: formatTime(position)),
@@ -109,8 +108,7 @@ class _LyricsPageState extends State<LyricsPage> {
             ),
             VerticalBox(size: 11),
             Padding(
-              padding:
-                  EdgeInsets.symmetric(horizontal: as.sizeWidthPercent(71.84)),
+              padding: EdgeInsets.symmetric(horizontal: as.wp(71.84)),
               child: Row(
                 children: [
                   const CustomIcon(
@@ -118,31 +116,31 @@ class _LyricsPageState extends State<LyricsPage> {
                   ),
                   HorizontalBox(size: 10),
                   const CustomIcon(
-                    icon: Icons.skip_next_outlined,
+                    icon: Hicons.previous,
                     color: AppColors.blackGrey,
                   ),
                   HorizontalBox(size: 10),
                   Container(
-                    height: as.sizeHeightPercent(51),
-                    width: as.sizeWidthPercent(51),
+                    height: as.hp(51),
+                    width: as.wp(51),
                     decoration: const BoxDecoration(
                       color: AppColors.primaryGreen,
                       shape: BoxShape.circle,
                     ),
                     child: Center(
                       child: CustomIcon(
-                        icon: isPlaying ? Icons.pause : Icons.play_arrow,
+                        icon: isPlaying ? Hicons.pause : Hicons.play_bold,
                       ),
                     ),
                   ),
                   HorizontalBox(size: 10),
                   const CustomIcon(
-                    icon: Icons.skip_next_outlined,
+                    icon: Hicons.next,
                     color: AppColors.blackGrey,
                   ),
                   HorizontalBox(size: 10),
                   const CustomIcon(
-                    icon: Icons.shuffle_on_rounded,
+                    icon: Hicons.shuffle_2,
                     color: AppColors.blackGrey,
                   ),
                 ],

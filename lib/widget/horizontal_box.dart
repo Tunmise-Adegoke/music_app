@@ -15,7 +15,7 @@ class HorizontalBox extends StatelessWidget {
   Widget build(BuildContext context) {
     AppSize as = AppSize(context);
     return SizedBox(
-      width: as.sizeWidthPercent(size),
+      width: as.wp(size),
     );
   }
 }

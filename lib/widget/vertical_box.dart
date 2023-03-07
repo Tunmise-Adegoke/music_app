@@ -14,7 +14,7 @@ class VerticalBox extends StatelessWidget {
   Widget build(BuildContext context) {
     AppSize as = AppSize(context);
     return SizedBox(
-      height: as.sizeHeightPercent(size),
+      height: as.hp(size),
     );
   }
 }

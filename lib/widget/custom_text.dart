@@ -30,7 +30,7 @@ class CustomText extends StatelessWidget {
           color: color,
           fontFamily: 'Satoshi',
           fontWeight: fontWeight,
-          fontSize: as.sizeHeightPercent(size),
+          fontSize: as.hp(size),
         ),
       ),
     );
